@@ -1,32 +1,43 @@
 console.log('App.js is running!');
 
-let btnState = false;
-let btnText ='Show details';
+class VisiblityToggle extends React.Component{
+  constructor (props){
+    super(props);
+    this.handleToggleVisiblity = this.handleToggleVisiblity.bind(this);
+    this.state = {
+      btnState: false,
+    }
+  }
 
-const showDetails = () => {
-    btnState = !btnState;
-    render();
-};
+  handleToggleVisiblity () {
+    this.setState((prevState) => {
+      return {
+        btnState: !prevState.btnState
+      }
+    })
+  }
 
-const appRoot = document.getElementById('app');
-
-const render = () => {
-  const template = (
-    <div>
+  render () {
+    return (
+      <div>
       <h1>Visiblity Toggle</h1>
-      <button onClick={showDetails}>{btnState ? 'Hide details' : 'Show details'}</button>
-      {btnState && (
+      <button onClick={this.handleToggleVisiblity}>{this.state.btnState ? 'Hide details' : 'Show details'}</button>
+      {this.state.btnState && (
           <div>
             <p>tatatatatata</p>
           </div>
       )}
     </div>
-  );
-  
-  ReactDOM.render(template,appRoot);
+    )
+  }
+
+
 }
 
-render();
+const appRoot = document.getElementById('app');
+
+ReactDOM.render(<VisiblityToggle/>,appRoot);
+
 
 
 
