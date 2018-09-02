@@ -1,44 +1,45 @@
 class Counter extends React.Component {
-    constructor (props) {
+    constructor(props){
         super(props);
-        this.incrementCounter = this.incrementCounter.bind(this);
-        this.decreaseCounter = this.decreaseCounter.bind(this);
-        this.resetCounter = this.resetCounter.bind(this);
+        this.handleIncrement= this.handleIncrement.bind(this);
+        this.handleDecrement= this.handleDecrement.bind(this);
+        this.handleReset= this.handleReset.bind(this);
 
         this.state = {
-            counter: 0,
+            count: 0,
         }
     }
-    render() {
-        return (
-            <div>
-                <h1>Count: {this.state.counter}</h1>
-                <button onClick={this.incrementCounter}>+1</button>
-                <button onClick={this.decreaseCounter}>-1</button>
-                <button onClick={this.resetCounter}>reset</button>  
-            </div>
-        )
-    }
-    incrementCounter() {
-        this.setState((prevState) => {
-            return {
-                counter: prevState.counter +1
-            }
+
+    handleIncrement() {
+        this.setState({
+            count: this.state.count +1,
         })
     }
-    decreaseCounter() {
+
+    // using the updater React 16 method
+    handleDecrement() {
         this.setState((prevState) => {
             return {
-                counter: prevState.counter -1
-            }
-        })
-    }
-    resetCounter() {
-        this.setState(() => {
-            return {
-                counter: 0
+                count: prevState.count +1,
             }
         });
+    }
+    handleReset() {
+        this.setState({
+            count: '',
+        })
+    }
+
+
+    render(){
+        return (
+            <div>
+                <h1>Count:{this.state.count}</h1>
+                <button onClick={this.handleIncrement}>+1</button>
+                <button onClick={this.handleReset}>reset</button>
+                <button onClick={this.handleDecrement}>-1</button>
+            </div>
+        )
     }
 }
 
